@@ -18,12 +18,13 @@
         type: 'GET',
         cache: false,
         success: function(data) {
-            var root,allData, body, table;
+            var root, allData, body, table;
             root = $("<div></div>")
             root.html(data.responseText)
 
             var content = root.find("#content"); // find all the nodes that have ID "content"
-            var h2s = content.find(".mw-headline"); // search in all "content" nodes for nodes of class ".mw-headline"
+            //var h2s = content.find(".mw-headline"); // search in all "content" nodes for nodes of class ".mw-headline"
+		var h2s = content.find(".wikitable tbody tr th");
 
             $.each(h2s, function(index, value) {
                 console.log($(value).text()); // print text
