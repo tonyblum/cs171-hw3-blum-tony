@@ -12,6 +12,7 @@
 
 <script>
     var convertToInt;
+	var fileinput;
 
     $.ajax({
         url: "http://en.wikipedia.org/wiki/World_population_estimates",
@@ -24,23 +25,27 @@
 
             var content = root.find("#content"); // find all the nodes that have ID "content"
             //var h2s = content.find(".mw-headline"); // search in all "content" nodes for nodes of class ".mw-headline"
-		var h2s = content.find(".wikitable tbody tr th");
+		var h2s = content.find(".wikitable tbody tr td");
 
             $.each(h2s, function(index, value) {
-                console.log($(value).text()); // print text
+		    // I think this is where I need to add another find statement
+            console.log($(value).text()); // print text
+			fileinput = $(value);
             });
 			
-			saveToFile(["Hello World"],"test.txt")
+			saveToFile(["hello"],"test.txt")
         },
         error: function() {
             return console.log("error");
         }
     });
 
-    convertToInt = function(s) {
-        return parseInt(s.replace(/,/g, ""), 10);
+	//This code is not getting called until after the ajax request runs
+
+    convertToInt = function(fileinput) {
+        return parseInt(fileinput.replace(/,/g, ""), 10);
     };
-	
+	console.log(fileinput);
     /* takes an array of strings
        and writes them line by line into a file given by filename
      */
