@@ -25,14 +25,33 @@
 
             var content = root.find("#content"); // find all the nodes that have ID "content"
             //var h2s = content.find(".mw-headline"); // search in all "content" nodes for nodes of class ".mw-headline"
-		var h2s = content.find(".wikitable tbody tr td");
+			var h2s = content.find(".wikitable tbody tr");
+				delete h2s[0];
+				console.log(h2s);
 
             $.each(h2s, function(index, value) {
-		    // I think this is where I need to add another find statement
-            console.log($(value).text()); // print text
-			fileinput = $(value);
+				// I think this is where I need to add another find statement
+		        console.log($(value).text().trim().replace(/\s/g, '').split("\n")); // print text
+				fileinput = $(value);
+				//. trim
+				/*for (var i = 0; i< 5; i++){
+					console.log(fileinput[i]);
+				}*/
             });
-			
+			console.log(fileinput.text());
+
+			/*
+			wordsArray = new Array(); 
+			wordsArray[0] = "";
+			["Year", "United States Census Bureau", "Population Reference Bureau", "United Nations Department of Economic and Social Affairs", 				"Maddison", "Tanton", "McEvedy", "Clark"].forEach(function(d){wordsArray[0]+=d+", ";});
+			*/
+
+			//This code is not getting called until after the ajax request runs
+		    convertToInt = function(fileinput) {
+			  return parseInt(fileinput.replace(/,/g, ""), 10);
+		    };
+
+			console.log(fileinput);
 			saveToFile(["hello"],"test.txt")
         },
         error: function() {
@@ -40,12 +59,7 @@
         }
     });
 
-	//This code is not getting called until after the ajax request runs
 
-    convertToInt = function(fileinput) {
-        return parseInt(fileinput.replace(/,/g, ""), 10);
-    };
-	console.log(fileinput);
     /* takes an array of strings
        and writes them line by line into a file given by filename
      */
