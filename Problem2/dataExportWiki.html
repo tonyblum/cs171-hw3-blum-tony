@@ -11,11 +11,9 @@
 <body>
 
 <script>
-    var convertToInt;
-	var fileinput;
 
     var convertToInt = function(d) {
-	  return parseInt(d.replace(/,/g, ""), 10);
+		return parseInt(d.replace(/,/g, ""), 10);
     };
 
     $.ajax({
@@ -24,51 +22,33 @@
         cache: false,
         success: function(data) {
             var root, allData, body, table;
+			var clean_td, int_td;
+
             root = $("<div></div>")
             root.html(data.responseText)
 
             var content = root.find("#content"); // find all the nodes that have ID "content"
             //var h2s = content.find(".mw-headline"); // search in all "content" nodes for nodes of class ".mw-headline"
-			var h2s = content.find(".wikitable tbody tr");
-				//delete h2s[0];
-				//console.log(h2s);
-			
-			
-		var h3s;
-		var data;
-		var clean_data;
-		var int_data;
+			var trs = content.find(".wikitable tbody tr");
 
-            $.each(h2s, function(index, value) {
-				// I think this is where I need to add another find statement
-				//console.log($(value).text());
-		        	//var data = $(value).text();//trim().replace(/\s/g, ' ')//.split(";"); // print text
-				//console.log(data);
+            $.each(trs, function(index, value) {
 
 				if(index === 0)
 					return;
 
 				var $value = $(value);
-				
-				//console.log($(value).text());
-				
 				var tds = $value.find("td");
 
-				//tds.first().text();
-
 				$.each(tds, function(index, td){
-	
 					if(index === 0)
-					return;
-
+						return;
 					if(index > 5)
-					return;					
+						return;					
 
 					var $td = $(td);
-					console.log($td.text());					
-					//var intdata = convertToInt(data);
-					//data = h3s.text();
-				
+					clean_td = $td.text().trim();
+					int_td = convertToInt(clean_td);
+					console.log(int_td)
 				});
 
 				var data = [];
@@ -90,17 +70,13 @@
 					console.log(fileinput[i]);
 				}*/
             });
-			console.log(int_data);
-			
+
 			/*
 			wordsArray = new Array(); 
 			wordsArray[0] = "";
 			["Year", "United States Census Bureau", "Population Reference Bureau", "United Nations Department of Economic and Social Affairs", 				"Maddison", "Tanton", "McEvedy", "Clark"].forEach(function(d){wordsArray[0]+=d+", ";});
 			*/
 
-			//This code is not getting called until after the ajax request runs
-
-			console.log(trunc_data);
 			saveToFile(["hello"],"test.txt")
         },
         error: function() {
