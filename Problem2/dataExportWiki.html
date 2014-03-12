@@ -14,6 +14,10 @@
     var convertToInt;
 	var fileinput;
 
+    var convertToInt = function(d) {
+	  return parseInt(d.replace(/,/g, ""), 10);
+    };
+
     $.ajax({
         url: "http://en.wikipedia.org/wiki/World_population_estimates",
         type: 'GET',
@@ -26,20 +30,68 @@
             var content = root.find("#content"); // find all the nodes that have ID "content"
             //var h2s = content.find(".mw-headline"); // search in all "content" nodes for nodes of class ".mw-headline"
 			var h2s = content.find(".wikitable tbody tr");
-				delete h2s[0];
-				console.log(h2s);
+				//delete h2s[0];
+				//console.log(h2s);
+			
+			
+		var h3s;
+		var data;
+		var clean_data;
+		var int_data;
 
             $.each(h2s, function(index, value) {
 				// I think this is where I need to add another find statement
-		        console.log($(value).text().trim().replace(/\s/g, '').split("\n")); // print text
-				fileinput = $(value);
+				//console.log($(value).text());
+		        	//var data = $(value).text();//trim().replace(/\s/g, ' ')//.split(";"); // print text
+				//console.log(data);
+
+				if(index === 0)
+					return;
+
+				var $value = $(value);
+				
+				//console.log($(value).text());
+				
+				var tds = $value.find("td");
+
+				//tds.first().text();
+
+				$.each(tds, function(index, td){
+	
+					if(index === 0)
+					return;
+
+					if(index > 5)
+					return;					
+
+					var $td = $(td);
+					console.log($td.text());					
+					//var intdata = convertToInt(data);
+					//data = h3s.text();
+				
+				});
+
+				var data = [];
+				data.push("");
+				//clean_data = data.trim();
+				//int_data = convertToInt(clean_data);
+				
+				// for each column in value convert text to int, if has length (!isNaN) then push it onto an array I make
+				// array.join(",")
+				// arrayOfLines.push(line)
+				
+				//var arr = data.split(",");
+
+				//var trunc_data = data.slice(0,10);
+
+				
 				//. trim
 				/*for (var i = 0; i< 5; i++){
 					console.log(fileinput[i]);
 				}*/
             });
-			console.log(fileinput.text());
-
+			console.log(int_data);
+			
 			/*
 			wordsArray = new Array(); 
 			wordsArray[0] = "";
@@ -47,11 +99,8 @@
 			*/
 
 			//This code is not getting called until after the ajax request runs
-		    convertToInt = function(fileinput) {
-			  return parseInt(fileinput.replace(/,/g, ""), 10);
-		    };
 
-			console.log(fileinput);
+			console.log(trunc_data);
 			saveToFile(["hello"],"test.txt")
         },
         error: function() {
