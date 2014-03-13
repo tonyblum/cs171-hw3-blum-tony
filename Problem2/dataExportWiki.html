@@ -27,6 +27,7 @@
 			var line1 = "";
 			var line2 = "";
 			var line3 = "";
+			var line4 = "";
 			var year = "";
 
             root = $("<div></div>")
@@ -77,6 +78,13 @@
 						line3 += ",";
 					}
 
+					if(index === 5){
+						line4 += int_td;
+						line4 += ",";
+					}
+					
+					// I want to put every element in line where %5 = 1 in index 0 of array					
+		
 				});
 
             });
@@ -87,14 +95,20 @@
 			["Year", "United States Census Bureau", "Population Reference Bureau", "United Nations Department of Economic and Social Affairs", 				"Maddison", "Tanton", "McEvedy", "Clark"].forEach(function(d){wordsArray[0]+=d+", ";});
 			*/
 
+			
+			//console.log(typeof(total_line));
+
 			var data = [];
 			data[0] = "";
+			//data[0] = line.concat(line1);
 			data[1] = line;
 			data[2] = line1;
 			data[3] = line2;
 			data[4] = line3;
-			console.log(data);
+			data[5] = line4;
 			
+			data[6] = line.concat(line1).concat(line2).concat(line3).concat(line4);
+			console.log(data);
 			// need to pass in the data array and not the data string
 			saveToFile(["data"],"test.txt")
         },
