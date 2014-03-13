@@ -99,37 +99,47 @@
 			//console.log(typeof(total_line));
 
 			var data = [];
-			data[0] = "";
+			//data[0] = "";
 			//data[0] = line.concat(line1);
-			data[1] = line;
-			data[2] = line1;
-			data[3] = line2;
-			data[4] = line3;
-			data[5] = line4;
+			data[0] = line;
+			data[1] = line1;
+			data[2] = line2;
+			data[3] = line3;
+			data[4] = line4;
 			
 			var str = line.concat(line1).concat(line2).concat(line3).concat(line4);
 
 			var arr = str.split(',');
-			console.log(arr);
+			//console.log(arr);
 
 			// data[6] has all the information I want, I now just have to go from the 
 			// figure out how to get every 5th element			
 
 			var size = Math.floor(arr.length / 5 + 1);
-			console.log(size);
+			//console.log(size);
 
 			var data2 = []; //switch the horizontal and vertical orientation of the data				
 			
 			//for (var i = 0; i < size ; i+=5){
 				//data2.push(data[i]);
-			//	console.log(data[6]);
+			//	data2[0] += arr[i];
 			//}
+
+			//
+			// I have the data set up so that I have data[0] = column and I need data[0] = row. how to switch?
+			// each row is the same as s column[1-5], column[5-10], column[10-15]. I need if column is 
+			// if (column % 5
+	
+
+			//
 			
+			console.log(data);				
+	
 			//console.log(data2);
 
 			//console.log(data);
 			// need to pass in the data array and not the data string
-			saveToFile(["data"],"test.txt")
+			saveToFile(data,"test.txt")
         },
         error: function() {
             return console.log("error");
