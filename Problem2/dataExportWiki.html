@@ -38,7 +38,7 @@
 
             $.each(trs, function(index, value) {
 
-				if(index === 0)
+				if(index < 11)
 					return;
 
 				var $value = $(value);
@@ -54,7 +54,7 @@
 					var $td = $(td);
 					clean_td = $td.text().trim();
 					int_td = convertToInt(clean_td);
-					if (isNaN(int_td)) int_td = 0;
+					if (isNaN(int_td)) int_td = " ";
 					//console.log(int_td)
 
 					if(index === 1){
@@ -79,23 +79,6 @@
 
 				});
 
-
-				//clean_data = data.trim();
-				//int_data = convertToInt(clean_data);
-
-				// for each column in value convert text to int, if has length (!isNaN) then push it onto an array I make
-				// array.join(",")
-				// arrayOfLines.push(line)
-
-				//var arr = data.split(",");
-
-				//var trunc_data = data.slice(0,10);
-
-
-				//. trim
-				/*for (var i = 0; i< 5; i++){
-					console.log(fileinput[i]);
-				}*/
             });
 
 			/*
@@ -103,22 +86,17 @@
 			wordsArray[0] = "";
 			["Year", "United States Census Bureau", "Population Reference Bureau", "United Nations Department of Economic and Social Affairs", 				"Maddison", "Tanton", "McEvedy", "Clark"].forEach(function(d){wordsArray[0]+=d+", ";});
 			*/
-			//console.log(line);
-			//console.log(line1);
-			//console.log(line2);
-			//console.log(line3);
-			//console.log(year);
 
 			var data = [];
-			//data.push("");
 			data[0] = "";
 			data[1] = line;
 			data[2] = line1;
 			data[3] = line2;
 			data[4] = line3;
 			console.log(data);
-
-			saveToFile(["hello"],"test.txt")
+			
+			// need to pass in the data array and not the data string
+			saveToFile(["data"],"test.txt")
         },
         error: function() {
             return console.log("error");
