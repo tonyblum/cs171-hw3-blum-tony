@@ -27,6 +27,7 @@
 			var line1 = "";
 			var line2 = "";
 			var line3 = "";
+			var year = "";
 
             root = $("<div></div>")
             root.html(data.responseText)
@@ -46,30 +47,32 @@
 				$.each(tds, function(index, td){
 					if(index === 0)
 						return;
+
 					if(index > 5)
 						return;		
 							
 					var $td = $(td);
 					clean_td = $td.text().trim();
 					int_td = convertToInt(clean_td);
+					if (isNaN(int_td)) int_td = 0;
 					//console.log(int_td)
 
-					if(index % 5 === 1){
+					if(index === 1){
 						line += int_td;
 						line += ",";
 					}
 
-					if(index % 5 === 2){
+					if(index === 2){
 						line1 += int_td;
 						line1 += ",";
 					}
 
-					if(index % 5 === 3){
+					if(index === 3){
 						line2 += int_td;
 						line2 += ",";
 					}
 
-					if(index % 5 === 4){
+					if(index === 4){
 						line3 += int_td;
 						line3 += ",";
 					}
@@ -105,6 +108,7 @@
 			console.log(line1);
 			console.log(line2);
 			console.log(line3);
+			console.log(year);
 
 			saveToFile(["hello"],"test.txt")
         },
