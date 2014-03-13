@@ -107,8 +107,27 @@
 			data[4] = line3;
 			data[5] = line4;
 			
-			data[6] = line.concat(line1).concat(line2).concat(line3).concat(line4);
-			console.log(data);
+			var str = line.concat(line1).concat(line2).concat(line3).concat(line4);
+
+			var arr = str.split(',');
+			console.log(arr);
+
+			// data[6] has all the information I want, I now just have to go from the 
+			// figure out how to get every 5th element			
+
+			var size = Math.floor(arr.length / 5 + 1);
+			console.log(size);
+
+			var data2 = []; //switch the horizontal and vertical orientation of the data				
+			
+			//for (var i = 0; i < size ; i+=5){
+				//data2.push(data[i]);
+			//	console.log(data[6]);
+			//}
+			
+			//console.log(data2);
+
+			//console.log(data);
 			// need to pass in the data array and not the data string
 			saveToFile(["data"],"test.txt")
         },
