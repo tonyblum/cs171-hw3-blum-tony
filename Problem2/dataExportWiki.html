@@ -24,6 +24,9 @@
             var root, allData, body, table;
 			var clean_td, int_td;
 			var line = "";
+			var line1 = "";
+			var line2 = "";
+			var line3 = "";
 
             root = $("<div></div>")
             root.html(data.responseText)
@@ -49,11 +52,22 @@
 					var $td = $(td);
 					clean_td = $td.text().trim();
 					int_td = convertToInt(clean_td);
-					console.log(int_td)
+					//console.log(int_td)
 
 					if(index % 5 === 1){
-						console.log("called");
 						line += int_td;
+					}
+
+					if(index % 5 === 2){
+						line1 += int_td;
+					}
+
+					if(index % 5 === 3){
+						line2 += int_td;
+					}
+
+					if(index % 5 === 4){
+						line3 += int_td;
 					}
 
 				});
@@ -84,6 +98,9 @@
 			["Year", "United States Census Bureau", "Population Reference Bureau", "United Nations Department of Economic and Social Affairs", 				"Maddison", "Tanton", "McEvedy", "Clark"].forEach(function(d){wordsArray[0]+=d+", ";});
 			*/
 			console.log(line);
+			console.log(line2);
+			console.log(line3);
+
 			saveToFile(["hello"],"test.txt")
         },
         error: function() {
