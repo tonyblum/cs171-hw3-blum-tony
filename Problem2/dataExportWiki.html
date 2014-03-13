@@ -23,6 +23,8 @@
         success: function(data) {
             var root, allData, body, table;
 			var clean_td, int_td;
+			var line = "";
+			var data = [];
 
             root = $("<div></div>")
             root.html(data.responseText)
@@ -39,20 +41,74 @@
 				var $value = $(value);
 				var tds = $value.find("td");
 
+				console.log("test");
+
 				$.each(tds, function(index, td){
 					if(index === 0)
 						return;
 					if(index > 5)
-						return;					
-
+						return;	
+					
 					var $td = $(td);
 					clean_td = $td.text().trim();
-					int_td = convertToInt(clean_td);
-					console.log(int_td)
-				});
+					int_td = convertToInt(clean_td);				
+					
+					console.log("test");
+					if (index % 5 === 1){
+						var line1 = "";
+						line1 += int_td;
+						console.log(line1);
+						console.log("test");
+						//console.log(int_td);
+						//data[1] += int_td;
+					}
 
-				var data = [];
-				data.push("");
+					if (index % 5 === 2){
+						var line2 = "";
+						line2 += int_td;
+						console.log(line2);
+						//console.log(int_td);
+						//data[2] += int_td;
+					}
+/*
+					if (index % 5 === 3){
+						//console.log(int_td);
+						//data[3] += int_td;
+					}
+			
+					if (index % 5 === 4){
+						//console.log(int_td);
+						//data[4] += int_td;
+					}
+*/
+
+
+					//console.log(int_td)
+
+
+					// how do I know how to split up td
+					// I should make a line every 5 tds (including blank tds)
+
+
+					// if each row %5 === 0 then push that as a line in an array
+					// make a new line					
+
+					//var line how to join a certain number of javascript vars into a string
+					// if (index % 5 === 0)
+					// how to append javasript elements into a string
+					
+
+					//console.log(int_td);
+
+					/*
+					if (index % 5 === 1){
+						line += int_td;
+					}
+					*/					
+
+					//console.log(str);
+
+				});
 				//clean_data = data.trim();
 				//int_data = convertToInt(clean_data);
 				
@@ -77,17 +133,19 @@
 			["Year", "United States Census Bureau", "Population Reference Bureau", "United Nations Department of Economic and Social Affairs", 				"Maddison", "Tanton", "McEvedy", "Clark"].forEach(function(d){wordsArray[0]+=d+", ";});
 			*/
 
-			saveToFile(["hello"],"test.txt")
+			saveToFile(["hello"],"test.txt");
         },
         error: function() {
             return console.log("error");
         }
     });
 
-
     /* takes an array of strings
        and writes them line by line into a file given by filename
      */
+
+
+
     var saveToFile = function(arrayOfLines, fileName) {
        /* adds linebreaks at the end*/
        var blob, blobText;
@@ -107,9 +165,6 @@
      String.prototype.endsWith = function(suffix) {
        return this.indexOf(suffix, this.length - suffix.length) !== -1;
      };
-	
-
-
 
 </script>
 
