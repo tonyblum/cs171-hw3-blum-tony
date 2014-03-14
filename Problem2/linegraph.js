@@ -34,6 +34,8 @@
     d3.csv("timeline.csv", function(data) {
 
         // convert your csv data and add it to dataSet
+		console.log(data);
+
 
         return createVis();
     });
@@ -58,6 +60,8 @@
 //        xAxis = ..
 //        yAxis = ..
 //        // add y axis to svg !
+
+		
 
 
     };

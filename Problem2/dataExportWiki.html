@@ -46,17 +46,20 @@
 				var tds = $value.find("td");
 
 				$.each(tds, function(index, td){
-					if(index === 0)
-						return;
-
+					
 					if(index > 5)
 						return;		
-							
+
 					var $td = $(td);
 					clean_td = $td.text().trim();
 					int_td = convertToInt(clean_td);
 					if (isNaN(int_td)) int_td = " ";
-					//console.log(int_td)
+
+					if(index === 0){
+						year += int_td;
+						year += ",";
+					}
+					//	return;
 
 					if(index === 1){
 						line += int_td;
@@ -82,9 +85,7 @@
 						line4 += int_td;
 						line4 += ",";
 					}
-					
-					// I want to put every element in line where %5 = 1 in index 0 of array					
-		
+
 				});
 
             });
@@ -95,50 +96,17 @@
 			["Year", "United States Census Bureau", "Population Reference Bureau", "United Nations Department of Economic and Social Affairs", 				"Maddison", "Tanton", "McEvedy", "Clark"].forEach(function(d){wordsArray[0]+=d+", ";});
 			*/
 
-			
-			//console.log(typeof(total_line));
-
 			var data = [];
-			//data[0] = "";
-			//data[0] = line.concat(line1);
+
 			data[0] = line;
 			data[1] = line1;
 			data[2] = line2;
 			data[3] = line3;
 			data[4] = line4;
-			
-			var str = line.concat(line1).concat(line2).concat(line3).concat(line4);
+			data[5] = year;
 
-			var arr = str.split(',');
-			//console.log(arr);
-
-			// data[6] has all the information I want, I now just have to go from the 
-			// figure out how to get every 5th element			
-
-			var size = Math.floor(arr.length / 5 + 1);
-			//console.log(size);
-
-			var data2 = []; //switch the horizontal and vertical orientation of the data				
-			
-			//for (var i = 0; i < size ; i+=5){
-				//data2.push(data[i]);
-			//	data2[0] += arr[i];
-			//}
-
-			//
-			// I have the data set up so that I have data[0] = column and I need data[0] = row. how to switch?
-			// each row is the same as s column[1-5], column[5-10], column[10-15]. I need if column is 
-			// if (column % 5
-	
-
-			//
-			
 			console.log(data);				
-	
-			//console.log(data2);
 
-			//console.log(data);
-			// need to pass in the data array and not the data string
 			saveToFile(data,"test.txt")
         },
         error: function() {
@@ -170,11 +138,7 @@
        return this.indexOf(suffix, this.length - suffix.length) !== -1;
      };
 
-
-
-
 </script>
-
 
 </body>
 </html>
