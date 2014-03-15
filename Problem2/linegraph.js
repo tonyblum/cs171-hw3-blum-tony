@@ -47,7 +47,9 @@
 		//var width = 100;
 		//var height = 100;
 
-          xScale = d3.scale.linear().domain([0,100]).range([0, bbVis.w]);  // define the right domain generically
+		// the largest value in the wiki table is aprox 10,000,000,000
+	
+          xScale = d3.scale.linear().domain([0,2050]).range([0, bbVis.w]);  // define the right domain generically
 
 		  // example that translates to the bottom left of our vis space:
 		
@@ -79,7 +81,7 @@
 			.range([height, 0]);
 
 		var xAxis = d3.svg.axis()
-			.scale(x)
+			.scale(xScale)
 			.orient("bottom");
 
 		var yAxis = d3.svg.axis()
@@ -95,7 +97,11 @@
 		  svg.append("g")
 			  .attr("class", "x axis")
 			  .attr("transform", "translate(0," + height + ")")
-			  .call(xAxis);
+			  .call(xAxis)
+			//.append("text")
+			// .style("text-anchor", "end")
+			// .attr("x", 6)
+			// .text("Time (Yrs)");
 
 		  svg.append("g")
 			  .attr("class", "y axis")
@@ -105,7 +111,7 @@
 			  .attr("y", 6)
 			  .attr("dy", ".71em")
 			  .style("text-anchor", "end")
-			  .text("Price ($)");
+			  .text("Population");
 		
 
 
