@@ -34,14 +34,14 @@
     .range([0, width]);
 
 	var y = d3.scale.linear()
-	.range([height, 0]);
+	.range([0, height]); //used to look like .range([height, 0]); but I think this is why it was inverted
 
 
     d3.csv("timeline2.csv", function(data) {
 
-			var line = d3.svg.line()
-		    .x(function(d) { return x(d.date); })
-		    .y(function(d) { return y(d.close); });        
+		var line = d3.svg.line()
+	    .x(function(d) { return x(d.date); })
+	    .y(function(d) { return y(d.close); });        
 
 		// convert your csv data and add it to dataSet
 		console.log(data);
@@ -84,7 +84,7 @@
 
 
           xScale = d3.scale.linear().domain([0,2050]).range([0, bbVis.w]);  // define the right domain generically
-		  yScale = d3.scale.pow().domain([0,10000000]).range([0, 500])//bbVis.h])
+		  yScale = d3.scale.pow().domain([10000000, 0]).range([0, 500])//bbVis.h])
 		  // example that translates to the bottom left of our vis space:
 
 /*
@@ -111,15 +111,16 @@
 		var x = d3.time.scale()
 			.range([0, width]);
 
-		var y = d3.scale.linear()
-			.range([height, 0]);
+		var y = d3.scale.log()
+			.range([100, height])
+			.domain([10000000000, 1]); // the max population value is 10 billion aprox
 
 		var xAxis = d3.svg.axis()
 			.scale(xScale)
 			.orient("bottom");
 
 		var yAxis = d3.svg.axis()
-			.scale(yScale)
+			.scale(y)
 			.orient("right");
 
 		var svg = d3.select("body").append("svg")
