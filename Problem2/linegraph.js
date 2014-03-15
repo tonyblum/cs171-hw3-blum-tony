@@ -30,12 +30,38 @@
             transform: "translate(" + margin.left + "," + margin.top + ")"
         });
 
+	var line = d3.svg.line()
+    .x(function(d) { return x(d.date); })
+    .y(function(d) { return y(d.close); });
 
-    d3.csv("timeline1.csv", function(data) {
+
+    d3.csv("timeline2.csv", function(data) {
 
         // convert your csv data and add it to dataSet
 		console.log(data);
 		console.log("hello");
+
+		var parseDate = d3.time.format("%y").parse;
+		console.log(parseDate);
+
+		console.log(data[0]);
+				
+		  data.forEach(function(d) {
+    		d.date = parseDate(d.date);
+   			d.close = +d.close;
+ 		  });
+
+		console.log("test");
+		//console.log(d.close);
+
+		 x.domain(d3.extent(data, function(d) { return d.date; }));
+ 		 y.domain(d3.extent(data, function(d) { return d.close; }));
+
+
+		  svg.append("path")
+		  .datum(data)
+		  .attr("class", "line")
+		  .attr("d", line);
 
 
         return createVis();
@@ -48,9 +74,11 @@
 		//var height = 100;
 
 		// the largest value in the wiki table is aprox 10,000,000,000
+
+		
 	
           xScale = d3.scale.linear().domain([0,2050]).range([0, bbVis.w]);  // define the right domain generically
-
+		  yScale = d3.scale.pow().domain([0,10000000]).range([0, 500])//bbVis.h])
 		  // example that translates to the bottom left of our vis space:
 		
 /*
@@ -85,8 +113,8 @@
 			.orient("bottom");
 
 		var yAxis = d3.svg.axis()
-			.scale(y)
-			.orient("left");
+			.scale(yScale)
+			.orient("right");
 
 		var svg = d3.select("body").append("svg")
 		.attr("width", width + margin.left + margin.right)
@@ -112,6 +140,7 @@
 			  .attr("dy", ".71em")
 			  .style("text-anchor", "end")
 			  .text("Population");
+
 		
 
 
