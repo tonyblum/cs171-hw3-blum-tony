@@ -1,6 +1,4 @@
-/**
- * Created by hen on 2/20/14.
- */
+
     var bbVis, brush, createVis, dataSet, handle, height, margin, svg, svg2, width;
 
     margin = {
@@ -54,8 +52,12 @@
 
 		  data.forEach(function(d) {
     		d.date = parseDate(d.date);
-   			d.close = +d.close;
+   			d.close = +d.close;		
+
  		  });
+
+		
+
 
 		console.log("test");
 		//console.log(d.close);
@@ -63,17 +65,18 @@
 		 x.domain(d3.extent(data, function(d) { return d.date; }));
  		 y.domain(d3.extent(data, function(d) { return d.close; }));
 
-
 		  svg.append("path")
 		  .datum(data)
 		  .attr("class", "line")
 		  .attr("d", line);
+	
+	});
 
 
-        return createVis();
-    });
 
-    createVis = function() {
+
+   
+
         var xAxis, xScale, yAxis,  yScale;
 
 		//var width = 100;
@@ -149,6 +152,3 @@
 			  .text("Population");
 
 
-
-
-    };
