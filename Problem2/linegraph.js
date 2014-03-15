@@ -34,7 +34,7 @@
     .range([0, width]);
 
 	var y = d3.scale.linear()
-	.range([height, 0]);
+	.range([height, 0]); //used to look like .range([height, 0]); but I think this is why it was inverted
 
 
     d3.csv("timeline2.csv", function(data) {

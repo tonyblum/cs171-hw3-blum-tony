@@ -30,7 +30,11 @@
             transform: "translate(" + margin.left + "," + margin.top + ")"
         });
 
+	var x = d3.time.scale()
+    .range([0, width]);
 
+	var y = d3.scale.linear()
+	.range([height, 0]);
 
 
     d3.csv("timeline2.csv", function(data) {
