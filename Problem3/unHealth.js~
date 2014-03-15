@@ -35,13 +35,16 @@ svg = d3.select("#visUN").append("svg").attr({
     });
 
 var date, all, child, woman; 
+var parseDate = d3.time.format("%b-%y").parse;
+
+
 
 d3.csv("unHealth.csv", function(data) {
-	console.log(data);
+	//console.log(data);
 
 
 	 data.forEach(function(d) {
-		//console.log(d.AnalysisDate);   
+		console.log(d.AnalysisDate);   
 		//console.log(d.AllRelevant);
 		//console.log(d.ChildrensHealth);
 		//console.log(d.WomensHealth);    
@@ -51,8 +54,8 @@ d3.csv("unHealth.csv", function(data) {
 		all = convertToInt(d.AllRelevant);
 		child = convertToInt(d.ChildrensHealth);
 		woman = convertToInt(d.WomensHealth);
+		date = parseDate(d.AnalysisDate);			
 		
-
 		console.log(woman);
 	})
 
