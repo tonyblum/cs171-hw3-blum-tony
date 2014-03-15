@@ -30,14 +30,20 @@
             transform: "translate(" + margin.left + "," + margin.top + ")"
         });
 
-	var line = d3.svg.line()
-    .x(function(d) { return x(d.date); })
-    .y(function(d) { return y(d.close); });
+	var x = d3.time.scale()
+    .range([0, width]);
+
+	var y = d3.scale.linear()
+	.range([height, 0]);
 
 
     d3.csv("timeline2.csv", function(data) {
 
-        // convert your csv data and add it to dataSet
+			var line = d3.svg.line()
+		    .x(function(d) { return x(d.date); })
+		    .y(function(d) { return y(d.close); });        
+
+		// convert your csv data and add it to dataSet
 		console.log(data);
 		console.log("hello");
 
@@ -45,7 +51,7 @@
 		console.log(parseDate);
 
 		console.log(data[0]);
-				
+
 		  data.forEach(function(d) {
     		d.date = parseDate(d.date);
    			d.close = +d.close;
@@ -75,12 +81,12 @@
 
 		// the largest value in the wiki table is aprox 10,000,000,000
 
-		
-	
+
+
           xScale = d3.scale.linear().domain([0,2050]).range([0, bbVis.w]);  // define the right domain generically
 		  yScale = d3.scale.pow().domain([0,10000000]).range([0, 500])//bbVis.h])
 		  // example that translates to the bottom left of our vis space:
-		
+
 /*
 		  var visFrame = svg.append("g").attr({
 		      "transform": "translate(" + bbVis.x + "," + (bbVis.y + bbVis.h) + ")",
@@ -91,7 +97,7 @@
 		  visFrame.append("rect");
 */		
   //....
-		  
+
 //        yScale = .. // define the right y domain and range -- use bbVis
 
 //        xAxis = ..
@@ -141,7 +147,7 @@
 			  .style("text-anchor", "end")
 			  .text("Population");
 
-		
+
 
 
     };
