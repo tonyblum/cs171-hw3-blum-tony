@@ -75,8 +75,7 @@ y = d3.scale.linear()
 	  //  y.domain(d3.extent(data, function(d) { return d.close; }));
 
 	})
-
-xScale = d3.scale.linear().domain([0,2050]).range([0,300]);  // define the right domain generically
+xScale = d3.scale.linear().domain([0,2050]).range([0,300]); //d3.time.scale();// define the right domain generically
 yScale = d3.scale.pow().domain([600000, 0]).range([0, 800])//bbOverview.h)
 
 var xAxis = d3.svg.axis()
