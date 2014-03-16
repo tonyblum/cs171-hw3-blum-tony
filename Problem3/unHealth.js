@@ -37,11 +37,14 @@ svg = d3.select("#visUN").append("svg").attr({
 var date, all, child, woman; 
 var parseDate = d3.time.format("%b-%y").parse;
 
-
+var convertToInt = function(s) {
+    return parseInt(s.replace(/,/g, ""), 10);
+};
 
 d3.csv("unHealth.csv", function(data) {
 	//console.log(data);
 
+var x, y;
 
 	 data.forEach(function(d) {
 		console.log(d.AnalysisDate);   
@@ -58,21 +61,20 @@ d3.csv("unHealth.csv", function(data) {
 		
 		console.log(woman);
 		console.log(date);
-	})
 
-});
+// draw the line chart of time vs woman
 
-var convertToInt = function(s) {
-    return parseInt(s.replace(/,/g, ""), 10);
-};
-
-// draw the line chart of date vs woman
-
-var x = d3.time.scale()
+x = d3.time.scale()
     .range([0, width]);
+//	.domain([0, date]):
 
-var y = d3.scale.linear()
+y = d3.scale.linear()
     .range([height, 0]);
+
+	  x.domain(d3.extent(data, function(d) { return d.date; }));
+	  //  y.domain(d3.extent(data, function(d) { return d.close; }));
+
+	})
 
 var xAxis = d3.svg.axis()
     .scale(x)
@@ -82,18 +84,15 @@ var yAxis = d3.svg.axis()
     .scale(y)
     .orient("left");
 
-//var line = d3.svg.line()
-//    .x(function(d) { return x(d.date); })
-//    .y(function(d) { return y(d.close); });
+var line = d3.svg.line()
+    .x(function(d) { return x(d.date); })
+    .y(function(d) { return y(d.close); });
 
 var svg = d3.select("body").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-//  x.domain(d3.extent(data, function(d) { return d.date; }));
-//  y.domain(d3.extent(data, function(d) { return d.close; }));
 
   svg.append("g")
       .attr("class", "x axis")
@@ -115,5 +114,5 @@ var svg = d3.select("body").append("svg")
       .attr("class", "line")
       .attr("d", line);
 
-
+});
 
