@@ -76,12 +76,15 @@ y = d3.scale.linear()
 
 	})
 
+xScale = d3.scale.linear().domain([0,2050]).range([0,300]);  // define the right domain generically
+yScale = d3.scale.pow().domain([600000, 0]).range([0, 300])//bbVis.h])
+
 var xAxis = d3.svg.axis()
-    .scale(x)
+    .scale(xScale)
     .orient("bottom");
 
 var yAxis = d3.svg.axis()
-    .scale(y)
+    .scale(yScale)
     .orient("left");
 
 var line = d3.svg.line()
@@ -107,7 +110,7 @@ var svg = d3.select("body").append("svg")
       .attr("y", 6)
       .attr("dy", ".71em")
       .style("text-anchor", "end")
-      .text("Price ($)");
+      .text("Tweets");
 
   svg.append("path")
       .datum(data) //used to be datum
